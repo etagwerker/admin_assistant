@@ -134,8 +134,9 @@ By default, all boolean fields displayed in the index can be toggled with an Aja
 
     index[:image].image_size = '300x500'
 
-By default, [Paperclip] and [FileColumn] image files are rendered at full-size in the index. To restrict their size, pass a size string to `image_size`.
+By default, [Paperclip] and [FileColumn] image files are rendered at full-size in the index. To restrict their for FileColumn, pass a size string to `image_size`.
 
+For Paperclip, pass a style keyword (eg. thumb) - 
 
 #### link\_to\_args
 

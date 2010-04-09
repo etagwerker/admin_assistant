@@ -29,8 +29,17 @@ class AdminAssistant
     class IndexView < View
       include AdminAssistant::Column::IndexViewMethods
       
+      # renders a styled url for the image or the original, depending on @image_size
       def html(record)
-        image_html record
+        if @image_size
+          @action_view.image_tag(
+            record.send(@column.name).url(@image_size)
+          )  
+        else
+          @action_view.image_tag(
+          record.send(@column.name).url
+        )          
+        end
       end
     end
     
