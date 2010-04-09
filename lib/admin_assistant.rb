@@ -41,11 +41,15 @@ class AdminAssistant
   def [](name)
     @base_settings[name]
   end
-    
+
+  # restricts the paperclip attachments to the names that are defined in settings
   def accumulate_columns(names)
-    columns = @model.paperclip_attachments.map { |paperclip_attachment|
-      PaperclipColumn.new paperclip_attachment
-    }
+    columns = []
+    @model.paperclip_attachments.each do |paperclip_attachment|
+      if names.include? paperclip_attachment
+        columns << (PaperclipColumn.new paperclip_attachment)  
+      end
+    end
     names.each do |column_name|
       unless columns.any? { |column| column.contains?(column_name) }
         column = column column_name
